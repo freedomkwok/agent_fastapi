@@ -33,6 +33,9 @@ Then run `Agent FastAPI: attach debugpy 5678` from VS Code. Set breakpoints in
 
 If `graph_id` is omitted, the API uses `mirofish_53c089d117c649c7` by default.
 Set `ZEP_AGENT_DEFAULT_GRAPH_ID` to change that default for the server process.
+The zep agent uses Zep Cloud by default. To query Graphiti's OraclePG backend,
+set `ZEP_CLIENT_BACKEND=OraclePG` plus `ORACLEPG_DSN`, `ORACLEPG_USER`,
+`ORACLEPG_PASSWORD`, and `GRAPH_ID` or `ORACLEPG_GRAPH_ID`.
 
 ```bash
 curl -X POST http://localhost:8080/chat \
@@ -78,5 +81,8 @@ the empty example values:
 ```bash
 kubectl create secret generic agent-fastapi-secrets \
   --from-literal=OPENAI_API_KEY="$OPENAI_API_KEY" \
-  --from-literal=ZEP_API_KEY="$ZEP_API_KEY"
+  --from-literal=ZEP_API_KEY="$ZEP_API_KEY" \
+  --from-literal=ORACLEPG_DSN="$ORACLEPG_DSN" \
+  --from-literal=ORACLEPG_USER="$ORACLEPG_USER" \
+  --from-literal=ORACLEPG_PASSWORD="$ORACLEPG_PASSWORD"
 ```

@@ -15,6 +15,7 @@ RUN apt-get update \
 COPY agent_fastapi ./agent_fastapi
 COPY imp_agent_core ./imp_agent_core
 COPY llm_inference_core ./llm_inference_core
+COPY graphiti ./graphiti
 
 WORKDIR /app/agent_fastapi
 RUN uv sync --frozen --no-dev
