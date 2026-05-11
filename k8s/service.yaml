@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: agent-fastapi
+  labels:
+    app: agent-fastapi
+spec:
+  type: ClusterIP
+  selector:
+    app: agent-fastapi
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-fastapi
+  labels:
+    app: agent-fastapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agent-fastapi
+  template:
+    metadata:
+      labels:
+        app: agent-fastapi
+    spec:
+      containers:
+        - name: agent-fastapi
+          image: agent-fastapi:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: ZEP_AGENT_DEFAULT_GRAPH_ID
+              value: "mirofish_53c089d117c649c7"
+          envFrom:
+            - secretRef:
+                name: agent-fastapi-secrets
+                optional: true
+            - configMapRef:
+                name: agent-fastapi-config
+                optional: true
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
