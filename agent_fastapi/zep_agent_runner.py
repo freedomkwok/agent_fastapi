@@ -4,6 +4,9 @@ import asyncio
 from dataclasses import dataclass
 from typing import Any
 
+from imp_agent_core.agent_core.a2a import OrchestrationMode, run_local_a2a_orchestration
+from imp_agent_core.zep_agent.registry import build_local_a2a_zep_agent
+
 
 @dataclass(frozen=True)
 class ZepAgentResult:
@@ -28,8 +31,6 @@ class ZepAgentRunner:
         task_poll_timeout_sec: float = 600.0,
         task_poll_interval_sec: float = 5.0,
     ) -> ZepAgentResult:
-        from agents.agent_core.a2a import OrchestrationMode, run_local_a2a_orchestration
-
         agent = await self._local_agent()
         async with self._run_lock:
             result = await run_local_a2a_orchestration(
@@ -52,9 +53,6 @@ class ZepAgentRunner:
 
         async with self._build_lock:
             if self._agent is None:
-                from agents.agent_core.a2a import OrchestrationMode
-                from agents.zep_agent.registry import build_local_a2a_zep_agent
-
                 self._agent = await asyncio.to_thread(
                     build_local_a2a_zep_agent,
                     mode=OrchestrationMode.HOST_DRIVEN,
