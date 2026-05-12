@@ -4,8 +4,11 @@ import asyncio
 from dataclasses import dataclass
 from typing import Any
 
-from imp_agent_core.agent_core.a2a import OrchestrationMode, run_local_a2a_orchestration
-from imp_agent_core.zep_agent.registry import build_local_a2a_zep_agent
+from imp_agent_core.agents.agent_core.a2a import (
+    OrchestrationMode,
+    run_local_a2a_orchestration,
+)
+from imp_agent_core.agents.zep_agent.registry import build_local_a2a_zep_agent
 
 
 @dataclass(frozen=True)
