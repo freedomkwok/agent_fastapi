@@ -7,6 +7,6 @@
         }
     ],
     "python.analysis.extraPaths": [
-        "../imp_agent_core"
+        ".."
     ]
 }
