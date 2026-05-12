@@ -23,6 +23,7 @@ request_logger = logging.getLogger("agent_fastapi.requests")
 class ChatRequest(BaseModel):
     message: str = Field(min_length=1)
     graph_id: str | None = None
+    graph_backend: str | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
     task_poll_timeout_sec: float = Field(default=600.0, gt=0)
     task_poll_interval_sec: float = Field(default=5.0, gt=0)
@@ -77,6 +78,9 @@ async def chat(
 ) -> ChatResponse:
     metadata = dict(request.metadata)
     metadata["graph_id"] = request.graph_id or metadata.get("graph_id") or DEFAULT_GRAPH_ID
+    graph_backend = str(request.graph_backend or metadata.get("graph_backend") or "").strip()
+    if graph_backend:
+        metadata["graph_backend"] = graph_backend
 
     try:
         result = await runner.invoke(

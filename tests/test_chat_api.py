@@ -48,6 +48,7 @@ def test_chat_invokes_zep_agent_with_graph_metadata(caplog: pytest.LogCaptureFix
             json={
                 "message": "韩立喜欢的人喜欢韩立吗？",
                 "graph_id": "mirofish_53c089d117c649c7",
+                "graph_backend": "oracle",
                 "metadata": {"source": "api-test"},
                 "task_poll_timeout_sec": 30,
                 "task_poll_interval_sec": 1,
@@ -68,6 +69,7 @@ def test_chat_invokes_zep_agent_with_graph_metadata(caplog: pytest.LogCaptureFix
             "metadata": {
                 "source": "api-test",
                 "graph_id": "mirofish_53c089d117c649c7",
+                "graph_backend": "oracle",
             },
             "task_poll_timeout_sec": 30,
             "task_poll_interval_sec": 1,
