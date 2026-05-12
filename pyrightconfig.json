@@ -1,5 +1,5 @@
 {
   "extraPaths": [
-    ".."
+    "../imp_agent_core"
   ]
 }

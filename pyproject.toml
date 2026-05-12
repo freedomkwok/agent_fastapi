@@ -36,10 +36,10 @@ target-version = "py311"
 select = ["E", "F", "I", "UP", "B"]
 
 [tool.basedpyright]
-extraPaths = [".."]
+extraPaths = ["../imp_agent_core"]
 
 [tool.pyright]
-extraPaths = [".."]
+extraPaths = ["../imp_agent_core"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
